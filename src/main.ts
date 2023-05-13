@@ -4,13 +4,11 @@ import { CanvasLayer, LayersList } from '@ver/CanvasLayer';
 import { Player } from '@/modules/Player';
 
 
-const canvas = new CanvasLayer({
-	layers: 'main'
-});
+const canvas = new CanvasLayer({ layers: 'main' });
 document.body.append(canvas);
-
 //@ts-ignore
 canvas.ondblclick = () => canvas.webkitRequestFullscreen();
+
 
 export const layers: LayersList = {};
 
@@ -25,6 +23,9 @@ for(let id in canvas.layers) {
 
 
 	function _update() {
+		player.rotation += 0.01;
+
+		layers.main.clearRect(0, 0, canvas.width, canvas.height);
 		player.draw(layers.main);
 
 		requestAnimationFrame(_update);
